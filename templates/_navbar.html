@@ -1,0 +1,31 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="{{ url_for('index') }}">Laundry Service</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav me-auto">
+          <a class="nav-link active" aria-current="page" href="{{ url_for('index') }}">Home</a>
+          {% if session.logged_in %}
+            <a class="nav-link" href="{{ url_for('place_order') }}">Place Order</a>
+            <a class="nav-link" href="{{ url_for('my_orders') }}">My Orders</a>
+            {% if session.role == 'admin' %}
+              <a class="nav-link" href="{{ url_for('admin_dashboard') }}">Admin Dashboard</a>
+            {% endif %}
+          {% endif %}
+        </div>
+        <div class="navbar-nav ms-auto">
+           {% if session.logged_in %}
+              <span class="navbar-text me-3">
+                  Welcome, {{ session.first_name }}! ({{ session.role }})
+              </span>
+              <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
+           {% else %}
+              <a class="nav-link" href="{{ url_for('login') }}">Login</a>
+              <a class="nav-link" href="{{ url_for('register') }}">Register</a>
+           {% endif %}
+        </div>
+      </div>
+    </div>
+  </nav>

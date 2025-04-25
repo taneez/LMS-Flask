@@ -1,0 +1,6 @@
+/* Add some padding below the fixed navbar */
+body {
+    padding-top: 80px; /* Match navbar height */
+}
+
+/* Add more custom styles as needed */

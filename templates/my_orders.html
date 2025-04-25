@@ -1,0 +1,32 @@
+{% extends 'layout.html' %}
+{% block title %}My Orders{% endblock %}
+{% block content %}
+<h2>My Laundry Orders</h2>
+{% if orders %}
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Order ID</th>
+            <th>Order Date</th>
+            <th>Total Amount</th>
+            <th>Status</th>
+            <th>Due Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for order in orders %}
+        <tr>
+            <td>{{ order.order_id }}</td>
+            {# Format date - requires datetime object or use Jinja filter if available #}
+            <td>{{ order.order_date.strftime('%Y-%m-%d %H:%M') if order.order_date else '-' }}</td>
+            <td>${{ "%.2f"|format(order.total_amount) }}</td>
+            <td>{{ order.order_status }}</td>
+            <td>{{ order.due_date.strftime('%Y-%m-%d') if order.due_date else 'N/A' }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<p>You have no orders yet. <a href="{{ url_for('place_order') }}">Place one now!</a></p>
+{% endif %}
+{% endblock %}

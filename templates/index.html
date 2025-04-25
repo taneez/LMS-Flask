@@ -1,0 +1,32 @@
+{% extends 'layout.html' %} {# This tells Jinja to use layout.html as the base #}
+
+{% block title %} {# This overrides the title block in layout.html (if defined there) #}
+  Welcome - Laundry Service
+{% endblock %}
+
+{% block content %} {# This overrides the content block in layout.html #}
+
+  <div class="px-4 py-5 my-5 text-center">
+    <h1 class="display-5 fw-bold text-body-emphasis">Laundry Management System</h1>
+    <div class="col-lg-6 mx-auto">
+      <p class="lead mb-4">Your one-stop solution for clean clothes! Efficient, transparent, and easy to use.</p>
+
+      {# Conditionally show buttons based on login status #}
+      {% if session.logged_in %}
+        {# User is logged in #}
+        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+          <a href="{{ url_for('place_order') }}" class="btn btn-success btn-lg px-4 gap-3">Place a New Order</a>
+          <a href="{{ url_for('my_orders') }}" class="btn btn-outline-secondary btn-lg px-4">View My Orders</a>
+        </div>
+      {% else %}
+        {# User is not logged in #}
+        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+          <a href="{{ url_for('login') }}" class="btn btn-primary btn-lg px-4 gap-3">Login</a>
+          <a href="{{ url_for('register') }}" class="btn btn-outline-secondary btn-lg px-4">Register</a>
+        </div>
+      {% endif %}
+
+    </div>
+  </div>
+
+{% endblock %} {# End of the content block #}
